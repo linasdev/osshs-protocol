@@ -48,10 +48,7 @@ namespace osshs
 
 					if (serializedEvent == nullptr)
 					{
-						OSSHS_LOG_ERROR_STREAM << "Failed to allocate memory for a buffer"
-							<< "(buffer_length = " << eventLength
-							<< ").\r\n";
-
+						OSSHS_LOG_ERROR("Failed to allocate memory for a buffer(bufferLength = %u).", eventLength);
 						return;
 					}
 
@@ -66,10 +63,7 @@ namespace osshs
 
 					if (serializedEvent == nullptr)
 					{
-						OSSHS_LOG_ERROR_STREAM << "Failed to allocate memory for a buffer"
-							<< "(buffer_length = " << eventLength
-							<< ").\r\n";
-
+						OSSHS_LOG_ERROR("Failed to allocate memory for a buffer(bufferLength = %u).", eventLength);
 						return;
 					}
 
@@ -104,7 +98,7 @@ namespace osshs
 				return receiverMac;
 			}
 
-			std::shared_ptr< events::Event >
+			std::shared_ptr<events::Event>
 			EventPacket::getEvent() const
 			{
 				return event;
@@ -116,7 +110,7 @@ namespace osshs
 				return event == nullptr;
 			}
 
-			std::unique_ptr< const uint8_t[] >
+			std::unique_ptr<const uint8_t[]>
 			EventPacket::serialize() const
 			{
 				std::unique_ptr<const uint8_t[]> serializedEvent = event->serialize();
@@ -135,10 +129,7 @@ namespace osshs
 
 				if (buffer == nullptr)
 				{
-					OSSHS_LOG_ERROR_STREAM << "Failed to allocate memory for a buffer"
-						<< "(buffer_length = " << packetLength
-						<< ").\r\n";
-
+					OSSHS_LOG_ERROR("Failed to allocate memory for a buffer(bufferLength = %u).", packetLength);
 					return std::unique_ptr<const uint8_t[]>();
 				}
 
@@ -175,7 +166,7 @@ namespace osshs
 						buffer[11 + i] = serializedEvent[i];
 				}
 
-				return std::unique_ptr< const uint8_t[] >(buffer);
+				return std::unique_ptr<const uint8_t[]>(buffer);
 			}
 		}
 	}

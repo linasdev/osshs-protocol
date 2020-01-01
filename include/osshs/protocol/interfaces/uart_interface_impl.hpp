@@ -73,13 +73,14 @@ namespace osshs
 			{
 				RF_BEGIN();
 
-				OSSHS_LOG_DEBUG_STREAM << "Writing event packet"
-					<< "(multi_target = "<< eventPacket->isMultiTarget()
-					<< ", command = " << eventPacket->isCommand()
-					<< ", transmitter_mac = " << eventPacket->getTransmitterMac()
-					<< ", receiver_mac = " << eventPacket->getTransmitterMac()
-					<< ", event_type = " << eventPacket->getEvent()->getType()
-					<< ").\r\n";
+				OSSHS_LOG_DEBUG(
+					"Writing event packet(multiTarget = %u, command = %u, transmitterMac = 0x%08x, receiverMac = 0x%08x, eventType = 0x%04x).",
+					eventPacket->isMultiTarget(),
+					eventPacket->isCommand(),
+					eventPacket->getTransmitterMac(),
+					eventPacket->getReceiverMac(),
+					eventPacket->getEvent()->getType()
+				);
 
 				RF_WAIT_UNTIL(ResourceLock<Uart>::tryLock());
 

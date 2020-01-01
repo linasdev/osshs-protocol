@@ -34,13 +34,14 @@ namespace osshs
 			void
 			Interface::reportEventPacket(std::shared_ptr<EventPacket> eventPacket)
 			{
-				OSSHS_LOG_DEBUG_STREAM << "Handling event packet"
-					<< "(multi_target = "<< eventPacket->isMultiTarget()
-					<< ", command = " << eventPacket->isCommand()
-					<< ", transmitter_mac = " << eventPacket->getTransmitterMac()
-					<< ", receiver_mac = " << eventPacket->getTransmitterMac()
-					<< ", event_type = " << eventPacket->getEvent()->getType()
-					<< ").\r\n";
+				OSSHS_LOG_DEBUG(
+					"Handling event packet(multiTarget = %u, command = %u, transmitterMac = 0x%08x, receiverMac = 0x%08x, eventType = 0x%04x).",
+					eventPacket->isMultiTarget(),
+					eventPacket->isCommand(),
+					eventPacket->getTransmitterMac(),
+					eventPacket->getReceiverMac(),
+					eventPacket->getEvent()->getType()
+				);
 
 				eventPacketQueue.push(eventPacket);
 			}

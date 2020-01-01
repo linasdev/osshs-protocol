@@ -28,7 +28,7 @@
 
 #include <modm/platform.hpp>
 #include <osshs/resource_lock.hpp>
-#include <osshs/interfaces/interface_manager.hpp>
+#include <osshs/protocol/interfaces/interface_manager.hpp>
 #include <osshs/log/logger.hpp>
 
 namespace osshs
@@ -128,10 +128,7 @@ namespace osshs
 
 							if (buffer == nullptr)
 							{
-								OSSHS_LOG_ERROR_STREAM << "Failed to allocate memory for a buffer"
-									<< "(buffer_length = " << bufferLength
-									<< ").\r\n";
-
+								OSSHS_LOG_ERROR("Failed to allocate memory for a buffer(bufferLength = %u).", bufferLength);
 								RF_RETURN();
 							}
 
@@ -172,10 +169,7 @@ namespace osshs
 
 							if (buffer == nullptr)
 							{
-								OSSHS_LOG_ERROR_STREAM << "Failed to allocate memory for a buffer"
-									<< "(buffer_length = " << bufferLength
-									<< ").\r\n";
-
+								OSSHS_LOG_ERROR("Failed to allocate memory for a buffer(bufferLength = %u).", bufferLength);
 								RF_RETURN();
 							}
 
@@ -218,13 +212,14 @@ namespace osshs
 			{
 				RF_BEGIN();
 
-				OSSHS_LOG_DEBUG_STREAM << "Writing event packet"
-					<< "(multi_target = "<< eventPacket->isMultiTarget()
-					<< ", command = " << eventPacket->isCommand()
-					<< ", transmitter_mac = " << eventPacket->getTransmitterMac()
-					<< ", receiver_mac = " << eventPacket->getTransmitterMac()
-					<< ", event_type = " << eventPacket->getEvent()->getType()
-					<< ").\r\n";
+				OSSHS_LOG_DEBUG(
+					"Writing event packet(multiTarget = %u, command = %u, transmitterMac = 0x%08x, receiverMac = 0x%08x, eventType = 0x%04x).",
+					eventPacket->isMultiTarget(),
+					eventPacket->isCommand(),
+					eventPacket->getTransmitterMac(),
+					eventPacket->getReceiverMac(),
+					eventPacket->getEvent()->getType()
+				);
 
 				RF_WAIT_UNTIL(ResourceLock<Can>::tryLock());
 
