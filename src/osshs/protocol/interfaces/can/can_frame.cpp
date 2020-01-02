@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2019 Linas Nikiperavicius
+ * Copyright (c) 2019-2020 Linas Nikiperavicius
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -74,7 +74,7 @@ namespace osshs
 					std::unique_ptr message(new modm::can::Message(extendedIdentifier, dataLen);
 					message->setExtended(true);
 					std::copy(&data[0], &data[dataLen], &message->data[0]);
-					
+
 					return message;
 				}
 
