@@ -6,3 +6,9 @@ TODO: Add project description.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Navigation
+* README
+* [CAN frame format](docs/CAN.md)
+* [USART frame format](docs/USART.md)
+* [Event packet format](docs/PACKET.md)
