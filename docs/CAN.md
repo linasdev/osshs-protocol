@@ -3,7 +3,7 @@
 ## Extended Identifier Format
 | Start bit | End bit | Name              | Description |
 | --------- | ------- | ----------------- | ----------- |
-| 0x00      | 0x00    | NOT_ERROR_FLAG    | If this bit is low, the frame is considered to be an error frame and has priority. |
+| 0x00      | 0x00    | NOT_ERROR_FLAG    | If this bit is low, the frame is considered to be an error frame. |
 | 0x01      | 0x01    | START_FRAME_FLAG* | If this bit is high, the frame is considered to be the first frame of a packet. |
 | 0x02      | 0x02    | MULTI_FRAME_FLAG  | If this bit is high, the frame is considered to be only a part of a packet. |
 | 0x03      | 0x08    | RESERVED          | Reserved |
