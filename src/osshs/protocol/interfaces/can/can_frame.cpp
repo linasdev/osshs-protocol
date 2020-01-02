@@ -61,11 +61,21 @@ namespace osshs
 					extendedIdentifier |= transmitterMac; // TRANSMITTER_MAC
 				}
 
-				CanFrame::CanFrame(modm::can::Message message)
+				CanFrame::CanFrame(const modm::can::Message &message)
 				{
 					data = std::unique_ptr<const uint8_t[]>(message.data);
 					dataLen = message.getLength();
 					extendedIdentifier = message.getIdentifier();
+				}
+
+				std::unique_ptr<modm::can::Message>
+				CanFrame::getMessage()
+				{
+					std::unique_ptr message(new modm::can::Message(extendedIdentifier, dataLen);
+					message->setExtended(true);
+					std::copy(&data[0], &data[dataLen], &message->data[0]);
+					
+					return message;
 				}
 
 				const uint8_t *

@@ -55,7 +55,14 @@ namespace osshs
 					 * @brief Construct CAN frame from a modm CAN message.
 					 * @param message Modm CAN message.
 					 */
-					CanFrame(modm::can::Message message);
+					CanFrame(const modm::can::Message &message);
+
+					/**
+					 * @brief Convert frame to a modm CAN message.
+					 * @return Pointer to converted message.
+					 */
+					std::unique_ptr<modm::can::Message>
+					getMessage();
 
 					/**
 					 * @brief Get pointer to data.
