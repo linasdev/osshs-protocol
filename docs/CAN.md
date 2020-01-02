@@ -17,17 +17,30 @@
 
 ## Frame Format
 
-### Error Packet (NOT_ERROR_FLAG = 0, START_FRAME_FLAG = 1, MULTI_FRAME_FLAG = 0, FRAME_COUNT = 0x01)
+### Error Packet
+* NOT_ERROR_FLAG = 0
+* START_FRAME_FLAG = 1
+* MULTI_FRAME_FLAG = 0
+* FRAME_COUNT = 0x01
+
 | Start byte | End byte | Name | Description |
 | ---------  | -------  | ---- | ----------- |
 | 0x00       | 0x07     | DATA | Serialized packet. |
 
-### Single Frame Packet (NOT_ERROR_FLAG = 1, START_FRAME_FLAG = 1, MULTI_FRAME_FLAG = 0, FRAME_COUNT = 0x01)
+### Single Frame Packet
+* NOT_ERROR_FLAG = 1
+* START_FRAME_FLAG = 1
+* MULTI_FRAME_FLAG = 0
+* FRAME_COUNT = 0x01
+
 | Start byte | End byte | Name | Description |
 | ---------  | -------  | ---- | ----------- |
 | 0x00       | 0x07     | DATA | Serialized packet. |
 
-### Multi Frame Packet (NOT_ERROR_FLAG = 1, MULTI_FRAME_FLAG = 1)
+### Multi Frame Packet
+* NOT_ERROR_FLAG = 1
+* MULTI_FRAME_FLAG = 1
+
 | Start byte | End byte | Name        | Description |
 | ---------  | -------  | ----------- | ----------- |
 | 0x00       | 0x00     | FRAME_COUNT | Least significant byte (0x0ff) of the total number of frames inside a packet. |
