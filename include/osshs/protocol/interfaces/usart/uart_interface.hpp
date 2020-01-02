@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-#ifndef OSSHS_PROTOCOL_CAN_INTERFACE_HPP
-#define OSSHS_PROTOCOL_CAN_INTERFACE_HPP
+#ifndef OSSHS_PROTOCOL_USART_INTERFACE_HPP
+#define OSSHS_PROTOCOL_USART_INTERFACE_HPP
 
 #include <osshs/protocol/interfaces/interface.hpp>
 
@@ -33,37 +33,30 @@ namespace osshs
 	{
 		namespace interfaces
 		{
-			template<typename Can>
-			class CanInterface : public Interface, private modm::NestedResumable<1>
+			namespace usart
 			{
-			public:
-				CanInterface() = default;
-			protected:
-				bool
-				run();
-			private:
-				std::shared_ptr<EventPacket> currentEventPacket;
-				std::unique_ptr<const uint8_t[]> currentBuffer;
-				uint16_t currentBufferLength;
-				uint16_t currentFrameCount;
-				uint16_t currentFrameId;
+				template<typename USART>
+				class UsartInterface : public Interface, private modm::NestedResumable<1>
+				{
+				public:
+					UsartInterface() = default;
+				protected:
+					bool
+					run();
+				private:
+					std::shared_ptr<EventPacket> currentEventPacket;
 
-				void
-				initialize();
+					void
+					initialize();
 
-				uint32_t
-				generateCurrentFrameIdentifier();
-
-				modm::ResumableResult<void>
-				readEventPacket();
-
-				modm::ResumableResult<void>
-				writeEventPacket(std::shared_ptr<EventPacket> eventPacket);
-			};
+					modm::ResumableResult<void>
+					writeEventPacket(std::shared_ptr<EventPacket> eventPacket);
+				};
+			}
 		}
 	}
 }
 
-#include <osshs/protocol/interfaces/can_interface_impl.hpp>
+#include <osshs/protocol/interfaces/usart/usart_interface_impl.hpp>
 
-#endif  // OSSHS_PROTOCOL_CAN_INTERFACE_HPP
+#endif  // OSSHS_PROTOCOL_USART_INTERFACE_HPP
