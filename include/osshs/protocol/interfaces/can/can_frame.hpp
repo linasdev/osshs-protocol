@@ -72,6 +72,13 @@ namespace osshs
 					getDataLen();
 
 					/**
+					 * @brief Get extended CAN frame identifier.
+					 * @return Extended CAN frame identifier.
+					 */
+					uint32_t
+					getExtendedIdentifier();
+
+					/**
 					 * @brief Get transmitter device MAC address.
 					 * @return Transmitter device MAC address.
 					 */

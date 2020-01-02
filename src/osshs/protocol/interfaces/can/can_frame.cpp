@@ -86,6 +86,12 @@ namespace osshs
 					return dataLen;
 				}
 
+				uint32_t
+				CanFrame::getExtendedIdentifier()
+				{
+					return extendedIdentifier;
+				}
+
 				uint16_t
 				CanFrame::getTransmitterMac()
 				{
