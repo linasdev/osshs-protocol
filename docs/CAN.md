@@ -9,7 +9,7 @@
 | 0x03      | 0x08    | RESERVED          | Reserved |
 | 0x09      | 0x0C    | FRAME_COUNT**     | Most significant nibble (0xf00) of the total number of frames inside a packet. |
 |           |         | FRAME_ID          | Most significant nibble (0xf00) of the current frame id. |
-| 0x0D      | 0x1C    | TRANSMITTER_MAC   | Least significant half word (0x0000ffff) of the transmitter device MAC address. |
+| 0x0D      | 0x1C    | TRANSMITTER_MAC   | Transmitter device MAC address. |
 
 > \* If the MULTI_FRAME_FLAG is not set, START_FRAME_FLAG must be set.
 
@@ -38,13 +38,25 @@
 | 0x00       | 0x07     | DATA | Serialized packet. |
 
 ### Multi Frame Packet
+
+#### First Frame
 * NOT_ERROR_FLAG = 1
+* START_FRAME_FLAG = 1
 * MULTI_FRAME_FLAG = 1
 
 | Start byte | End byte | Name        | Description |
 | ---------  | -------  | ----------- | ----------- |
 | 0x00       | 0x00     | FRAME_COUNT | Least significant byte (0x0ff) of the total number of frames inside a packet. |
-|            |          | FRAME_ID    | Least significant byte (0x0ff) of the current frame id. |
+| 0x01       | 0x07     | DATA        | Serialized packet. |
+
+#### Successive Frames
+* NOT_ERROR_FLAG = 1
+* START_FRAME_FLAG = 0
+* MULTI_FRAME_FLAG = 1
+
+| Start byte | End byte | Name        | Description |
+| ---------  | -------  | ----------- | ----------- |
+| 0x00       | 0x00     | FRAME_ID    | Least significant byte (0x0ff) of the current frame id. |
 | 0x01       | 0x07     | DATA        | Serialized packet. |
 
 ## Navigation
